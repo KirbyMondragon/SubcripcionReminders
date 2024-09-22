@@ -6,6 +6,8 @@ import { Model } from 'mongoose';
 import { CreateSubscriptionDto } from './dto/create-subscription.dto';
 import { UpdateSubscriptionDto } from './dto/update-subscription.dto';
 import { Subscription } from './entities/subscription.entity';
+import axios , {AxiosInstance} from 'axios'; 
+
 
 
 
@@ -16,8 +18,9 @@ export class SubscriptionService {
   constructor(
     @InjectModel(Subscription.name)
     private readonly SubscriptionModel: Model<Subscription>,
+    
   ){}
-
+  private readonly axios:AxiosInstance = axios
   async create(createSubscriptionDto: CreateSubscriptionDto) {
     // Sanitizar antes de crear
     createSubscriptionDto.company = createSubscriptionDto.company.toLowerCase();
@@ -202,12 +205,26 @@ export class SubscriptionService {
     timeZone: 'America/Mexico_City',
   })
   async testingCron() {
-    const currentTime = moment().tz('America/Mexico_City').format('HH:mm');
-    const subscription = await this.findExpiredAndExpiringThisMonth();
-    console.log(subscription.expired)
-    console.log(subscription.expiringThisMonth)
-    console.log(`Prueba de cron cada segundo. Hora actual en Querétaro: ${currentTime}`);
-    
+    try {
+      const currentTime = moment().tz('America/Mexico_City').format('HH:mm');
+      const subscription = await this.findExpiredAndExpiringThisMonth();
+  
+      // Aseguramos que haya licencias vencidas para enviar
+      if (subscription.expired && subscription.expired.length > 0) {
+        // Enviar todas las licencias en un solo POST
+        //Aqui iria el endpoint a tu WeebHook
+        await this.axios.post("Aqui va el link al webhook", {
+          licenses: subscription.expired
+        });
+        console.log('Suscripciones vencidas enviadas correctamente:', subscription.expired);
+      } else {
+        console.log('No hay suscripciones vencidas para enviar');
+      }
+  
+      console.log(`Prueba de cron cada segundo. Hora actual en Querétaro: ${currentTime}`);
+    } catch (error) {
+      console.error('Error al enviar las suscripciones vencidas:', error);
+    }
   }
 
 }
