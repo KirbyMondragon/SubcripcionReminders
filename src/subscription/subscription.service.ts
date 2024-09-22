@@ -184,24 +184,8 @@ export class SubscriptionService {
     }
   }
 
-
-
-
+  // inicia a las 8 am
   @Cron('0 8 * * *', {
-    timeZone: 'America/Mexico_City',
-  })
-  async handleCron() {
-    const currentTime = moment().tz('America/Mexico_City').format('HH:mm');
-    const subscription = await this.findExpiredAndExpiringThisMonth();
-    console.log(subscription.expired)
-   
-    
-  }
-
-  
-
-  // Para probar cada minuto
-  @Cron('* * * * * *', {
     timeZone: 'America/Mexico_City',
   })
   async testingCron() {
