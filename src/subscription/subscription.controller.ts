@@ -15,7 +15,7 @@ export class SubscriptionController {
 
   @Get()
   findAll() {
-    return this.subscriptionService.findAll();
+    return this.subscriptionService.findExpiredAndExpiringThisMonth();
   }
 
   @Get(':id')

@@ -31,9 +31,9 @@ export class Subscription extends Document {
   
     @Prop({
       required: true,
-      default: true,
+      enum: ['cancelada', 'activa', 'pendiente de pago'],
     })
-    status: boolean;
+    status: string;
   
     @Prop({
       required: true,
@@ -63,12 +63,13 @@ export class Subscription extends Document {
     paymentMethod: string;
   
     @Prop({
-      required: true,
+      required: false,
     })
     lastReminderDate: Date;
   
     @Prop({
-      required: true,
+      required: false,
+      
     })
     subscriptionEndDate: Date;
   }

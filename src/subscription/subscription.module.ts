@@ -13,5 +13,6 @@ import { Subscription, SubscriptionSchema } from './entities/subscription.entity
   ],
   controllers: [SubscriptionController],
   providers: [SubscriptionService],
+  exports:[ MongooseModule]
 })
 export class SubscriptionModule {}
