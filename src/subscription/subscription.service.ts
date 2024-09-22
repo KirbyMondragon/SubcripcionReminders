@@ -190,7 +190,7 @@ export class SubscriptionService {
   async handleCron() {
     const currentTime = moment().tz('America/Mexico_City').format('HH:mm');
     const subscription = await this.findExpiredAndExpiringThisMonth();
-    console.log(subscription)
+    console.log(subscription.expired)
    
     
   }
@@ -203,6 +203,9 @@ export class SubscriptionService {
   })
   async testingCron() {
     const currentTime = moment().tz('America/Mexico_City').format('HH:mm');
+    const subscription = await this.findExpiredAndExpiringThisMonth();
+    console.log(subscription.expired)
+    console.log(subscription.expiringThisMonth)
     console.log(`Prueba de cron cada segundo. Hora actual en Querétaro: ${currentTime}`);
     
   }

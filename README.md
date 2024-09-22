@@ -118,19 +118,19 @@ Que datos se deben enviar para registrar un servicio:
 ```
 
 {
-  "subscriptionId": "sub_123456",
-  "subscriptionName": "EmpresaDeEjemplo",
-  "company": "Empresa XYZ",
-  "price": 49,
-  "status": true,
-  "subscriptionStartDate": "2023-10-01T00:00:00Z",
+  "subscriptionId": "sub_567b843daresa2",
+  "subscriptionName": "Plan Básdico",
+  "company": "Empresa ABC",
+  "price": 29,
+  "status": "activa",
+  "subscriptionStartDate": "2024-07-10T00:00:00Z",
   "subscriptionInterval": "mensual",
-  "mail": "usuario@example.com",
-  "password": "ContraseñaSegura123!",
-  "paymentMethod": "tarjeta_credito",
-  "lastReminderDate": "2023-09-25T00:00:00Z",
-  "subscriptionEndDate": "2023-11-01T00:00:00Z"
+  "mail": "otro_usuario@example.com",
+  "password": "OtraContraseñaSegura!",
+  "paymentMethod": "tarjeta_debito",
 }
+
+
 
 
 ```
